@@ -10,7 +10,7 @@ def test():
 
 
 @click.command()
-@click.argument('group')
+@click.argument('group', default=None, required=False)
 @click.option('--reset/--no-reset', default=False, help='Delete existing group keys in config')
 def configure(group, reset):
     example_module.config.update(group, reset)
