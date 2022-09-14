@@ -73,7 +73,8 @@ class Config():
                         value = int(value)
                     elif key.key_type == 'path':
                         value = Path(value).resolve()
-                config[key.name] = str(value)
+
+                config[key.name] = None if value is None else str(value)
         
         save_json(self.path, config)
         print('configuration saved to %s' % self.path)
