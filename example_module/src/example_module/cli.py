@@ -3,7 +3,7 @@ import example_module
 
 
 @click.command()
-def run():
+def test():
     print('NAME saved as', example_module.config['NAME'])
     print('DATA_DIR located at', example_module.config['DATA_DIR'])
     print('SOME_NUMBER saved as', example_module.config['SOME_NUMBER'])
@@ -20,7 +20,7 @@ def configure(group, reset):
 def main():
     pass
 
-main.add_command(run)
+main.add_command(test)
 main.add_command(configure)
 
 if __name__ == '__main__':

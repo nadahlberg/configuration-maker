@@ -22,7 +22,7 @@ keys = [
 ]
 
 config = Config(
-	path=Path.home() / '.cache' / 'example_module',
+	path=Path.home() / '.cache' / 'example_module' / 'config.json',
 	config_keys=keys,
 	cli_command='example_module configure',
 )
