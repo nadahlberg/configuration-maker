@@ -139,6 +139,8 @@ main.add_command(test)
 Now we are ready to test.  From command line you can expect the following:
 
 ````
+pip install example_module
+
 example_module test
 > KeyError: 'The key "NAME" is not in your configuration file, run "example_module configure" to set value.'
 
