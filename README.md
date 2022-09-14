@@ -88,7 +88,7 @@ if __name__ == '__main__':
     configure()
 ````
 
-The `config.update` function also accepts arguments for `group`, which only update the keys within the chosen group, and `reset` which will override any already saved values for the configuration variables being updates.  You might incorporate these into your command like function as such:
+The `config.update` function also accepts arguments for `group`, which only update the keys within the chosen group, and `reset` which will override any already saved values for the configuration variables being updated.  You might incorporate these into your command line function as such:
 
 ````
 @click.command()
