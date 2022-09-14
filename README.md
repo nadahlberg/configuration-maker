@@ -85,7 +85,7 @@ def main():
 main.add_command(configure)
 
 if __name__ == '__main__':
-    configure()
+    main()
 ````
 
 The `config.update` function also accepts arguments for `group`, which only update the keys within the chosen group, and `reset` which will override any already saved values for the configuration variables being updated.  You might incorporate these into your command line function as such:
