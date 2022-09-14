@@ -5,7 +5,7 @@ Get started:
 
 `pip install configuration-maker`
 
-## Overview
+## Tutorial
 Configuration Maker allows you to inject customizable groups of configuration variables into your Python modules.  These variables can be used to store API keys, data paths, and other information that your module may rely on but which need to be defined by the user.  While they serve a similar use-case to environment variables, these configuration variables have a few additional features:
 
 - Easily implement a command-line interface for setting the values of configuration keys.
@@ -140,7 +140,7 @@ Now we are ready to test.  From command line you can expect the following:
 
 ````
 example_module test
-> KeyError: 'The key "NAME" is not in your configuration file, run "example_module configure info" to set value.'
+> KeyError: 'The key "NAME" is not in your configuration file, run "example_module configure" to set value.'
 
 example_module configure
 
