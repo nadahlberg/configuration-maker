@@ -85,7 +85,10 @@ class Config():
         if value is None:
             keys = [x for x in self.keys if x.name == key_name]
             if len(keys) > 0:
-                group = keys[0].group or ''
+                key = keys[0]
+                if key.default != '*no default*':
+                    return key.default
+                group = key.group or ''
                 raise KeyError('The key "%s" is not in your configuration file, run "%s %s" to set value.' % (key_name, self.cli_command, group))
             else:
                 raise KeyError('"%s" is not a valid configuration key' % key_name)
@@ -96,7 +99,7 @@ class Config():
 
 
 class ConfigKey():
-    def __init__(self, name, group=None, key_type='str', description=None):
+    def __init__(self, name, group=None, key_type='str', description=None, default='*no default*'):
         self.name = name
         self.group = group
         allowed_key_types = ['str', 'int', 'path']
@@ -104,8 +107,4 @@ class ConfigKey():
             raise ValueError('key_type must be one of %s' % allowed_key_types)
         self.key_type = key_type
         self.description = description
-
-
-
-
-
+        self.default = default

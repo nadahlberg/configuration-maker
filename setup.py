@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name='configuration-maker',
-	version='0.1.1',    
+	version='0.1.2',    
 	description='Create configuration files for Python modules that can be updated by CLI',
 	url='https://github.com/nadahlberg/configuration-maker',
 	author='Nathan Dahlberg',
