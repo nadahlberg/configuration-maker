@@ -4,6 +4,16 @@ import os
 from dotenv import load_dotenv
 
 
+
+KEY_TYPES = {
+    'str': str,
+    'int': int,
+    'float': float,
+    'bool': bool,
+    'path': lambda x: Path(x).resolve(),
+}
+
+
 def load_json(path):
     with open(str(path), 'r') as f:
         return json.loads(f.read())
@@ -35,12 +45,7 @@ class Config():
             if value is None:
                 value = config.get(key.name, None)
             if value is not None:
-                if key.key_type == 'str':
-                    value = str(value)
-                if key.key_type == 'int':
-                    value = int(value)
-                if key.key_type == 'path':
-                    value = Path(value)
+                value = key.convert(value)
             config[key.name] = value
 
         return config
@@ -67,12 +72,7 @@ class Config():
                 if not value:
                     value = current_value
                 else:
-                    if key.key_type == 'str':
-                        value = str(value)
-                    elif key.key_type == 'int':
-                        value = int(value)
-                    elif key.key_type == 'path':
-                        value = Path(value).resolve()
+                    value = key.convert(value)
 
                 config[key.name] = None if value is None else str(value)
         
@@ -102,9 +102,12 @@ class ConfigKey():
     def __init__(self, name, group=None, key_type='str', description=None, default='*no default*'):
         self.name = name
         self.group = group
-        allowed_key_types = ['str', 'int', 'path']
-        if key_type not in allowed_key_types:
-            raise ValueError('key_type must be one of %s' % allowed_key_types)
+        if key_type not in KEY_TYPES:
+            raise ValueError('key_type must be one of %s' % ','.join(list(KEY_TYPES.keys())))
         self.key_type = key_type
         self.description = description
         self.default = default
+
+    def convert(self, value):
+        return KEY_TYPES[self.key_type](value)
+
