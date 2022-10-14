@@ -21,7 +21,7 @@ def load_json(path):
 
 def save_json(path, obj):
     with open(str(path), 'w') as w:
-        w.write(json.dumps(obj, indent=4))
+        w.write(json.dumps(obj, indent=4, default=str))
 
 
 class Config():
