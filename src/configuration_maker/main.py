@@ -33,7 +33,7 @@ class Config():
         if autoload_env:
             load_dotenv()
             
-    def load(self):
+    def load(self, skip_env=False):
         config = {}
         if self.path.exists():
             try:
@@ -41,7 +41,7 @@ class Config():
             except json.decoder.JSONDecodeError:
                 self.path.unlink()
         for key in self.keys:
-            value = os.environ.get(key.name, None)
+            value = None if skip_env else os.environ.get(key.name, None)
             if value is None:
                 value = config.get(key.name, None)
             if value is not None:
@@ -51,7 +51,7 @@ class Config():
         return config
     
     def update(self, group=None, reset=False):
-        config = self.load()
+        config = self.load(skip_env=True)
         
         print('\n\n(leave blank to keep existing value)')
         for key in self.keys:
